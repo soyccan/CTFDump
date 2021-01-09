@@ -122,7 +122,7 @@ class CTFd(CTF):
 
     def __get_nonce(self):
         res = self.session.get(urljoin(self.url, "/login"))
-        return re.search('<input type="hidden" name="nonce" value="(.*?)">', res.text).group(1)
+        return re.search('<input[^>]*type="hidden"[^>]*name="nonce" value="([^"]*)">', res.text).group(1)
 
     def login(self, username, password):
         next_url = '/challenges'
